@@ -186,7 +186,13 @@ by 李青霖
     <script src="js/lib/remark-latest.min.js">
     </script>
     <script>
-      var slideshow = remark.create();
+      var slideshow = remark.create({
+            // sourceUrl: 'content.md',
+            highlightStyle: 'ir_black',
+            navigation: {
+                // click: true
+            }
+        });
     </script>
   </body>
 </html>
