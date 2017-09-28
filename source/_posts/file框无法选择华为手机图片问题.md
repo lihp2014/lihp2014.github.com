@@ -6,6 +6,7 @@ categories: '前端'
 ### 前情提要
 1. 项目中引用了github上一位道友贡献的图片上传插件[PhotoClip.js](https://github.com/baijunjie/PhotoClip.js)，移动端支持手势缩放，拖拽。非常好用。
 2. 用一个图标icon盖住了input file框，点击icon，手动触发file框的click事件，然后再进行选择操作。
+<!-- more -->
 
 ### Bug描述
 在华为手机上微信中打开时，点击上传图片icon，打开文档，如下图：

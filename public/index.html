@@ -249,8 +249,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/09/28/2016前端面试总结/" itemprop="url">
-                  2016前端面试总结
+                <a class="post-title-link" href="/2017/09/28/packagejson/" itemprop="url">
+                  package.json字段
                 </a>
               
             
@@ -263,7 +263,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-09-28T14:44:00+08:00" content="2017-09-28">
+            <time itemprop="dateCreated" datetime="2017-09-28T14:47:33+08:00" content="2017-09-28">
               2017-09-28
             </time>
           </span>
@@ -277,8 +277,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/面试/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
+                  <a href="/categories/node/" itemprop="url" rel="index">
+                    <span itemprop="name">node</span>
                   </a>
                 </span>
 
@@ -311,20 +311,9 @@
 
       
         
-          <p>原PPT看<a href="https://lihp2014.github.io/slides/FE-interview.html" target="_blank" rel="external"><strong>这里</strong></a></p>
-<h3 id="面试流程"><a href="#面试流程" class="headerlink" title="面试流程"></a>面试流程</h3><p><strong>递简历</strong></p>
-<ul>
-<li>一场面试应该准备4份简历（2轮技术+1轮HR+自己留1份）<ul>
-<li>基本信息+技能点+工作经历+项目经历（核心突出）</li>
-<li>技能点不要贪多 一定自己熟悉</li>
-<li>工作经历、项目经历 包括时间+描述+工作量</li>
-<li>获奖经历 与个人技能相关 论文/专利</li>
-<li>不要增加不确定因素 比如照片、政治背景</li>
-<li>不要增加不加分项 比如社团活动（技术岗非必需）</li>
-<li>个人博客/github丰富的 可以加上地址（平时积累）</li>
-<li>简历 1-2页比较合适
+          <h3 id="package-json里的各个字段"><a href="#package-json里的各个字段" class="headerlink" title="package.json里的各个字段"></a>package.json里的各个字段</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>项目的根目录中一般有一个package.json文件，定义了这个项目所需要的各种模块，以及项目的配置信息。npm install命令根据这个配置文件，自动下载所需的模块。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/09/28/2016前端面试总结/#more" rel="contents">
+            <a class="btn" href="/2017/09/28/packagejson/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -437,22 +426,133 @@
 
       
         
-          
-            <h3 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h3><ol>
+          <h3 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h3><ol>
 <li>项目中引用了github上一位道友贡献的图片上传插件<a href="https://github.com/baijunjie/PhotoClip.js" target="_blank" rel="external">PhotoClip.js</a>，移动端支持手势缩放，拖拽。非常好用。</li>
-<li>用一个图标icon盖住了input file框，点击icon，手动触发file框的click事件，然后再进行选择操作。</li>
-</ol>
-<h3 id="Bug描述"><a href="#Bug描述" class="headerlink" title="Bug描述"></a>Bug描述</h3><p>在华为手机上微信中打开时，点击上传图片icon，打开文档，如下图：<br><img src="./images/752286147338753965_Ink_LI.jpg" alt="Alt HW截图"><br>选择上图中1处图片文件夹下的图片时，所有图片蒙上了一层白板，无法进行选择操作。</p>
-<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><ol>
-<li>在网上查找相关问题的解决方案，<a href="https://github.com/weui/weui/issues/388" target="_blank" rel="external">这里</a>给出了详细描述，于是我按照最后的方式给file框添加了accept=”image/*”属性。</li>
-<li>添加该属性后，发现一个问题，html文档里file框的accept=”image/*”属性被浏览器渲染成了accept=”image/jpeg,image/x-png,image/gif”，这可能就是导致问题的原因。</li>
-<li>按照常理来说，浏览器是不会擅自修改html文档元素的属性的，一定是js某个地方对该属性进行了重写，于是仔细查找是哪个地方悄悄修改了file框的accept属性。</li>
-<li>对引用的插件挨个进行排查，在PhotoClip.js(前情提要中的第一点里的辣个)这个插件源码中发现了如下一行代码：<br><img src="./images/20161122111602.jpg" alt="Alt SourceCode截图"><br>至于这里为何要重写accept属性，我还不是很清楚。。</li>
-<li>既然插件里重写了accept属性，一定有作者的用意，那我也不能修改源码。于是在自己的代码中，触发file框的click事件后，对其accept属性又写成了”image/*”,如下：<br><img src="./images/20161122112226.jpg" alt="Alt 截图"></li>
-<li>至此问题解决。</li>
-</ol>
+<li>用一个图标icon盖住了input file框，点击icon，手动触发file框的click事件，然后再进行选择操作。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/09/28/file框无法选择华为手机图片问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/28/2016前端面试总结/" itemprop="url">
+                  2016前端面试总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-09-28T14:44:00+08:00" content="2017-09-28">
+              2017-09-28
+            </time>
+          </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>原PPT看<a href="https://lihp2014.github.io/slides/FE-interview.html" target="_blank" rel="external"><strong>这里</strong></a></p>
+<h3 id="面试流程"><a href="#面试流程" class="headerlink" title="面试流程"></a>面试流程</h3><p><strong>递简历</strong></p>
+<ul>
+<li>一场面试应该准备4份简历（2轮技术+1轮HR+自己留1份）<ul>
+<li>基本信息+技能点+工作经历+项目经历（核心突出）
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/09/28/2016前端面试总结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -520,7 +620,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -528,7 +628,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -537,7 +637,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
